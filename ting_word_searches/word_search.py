@@ -1,6 +1,3 @@
-from ting_file_management.queue import Queue
-
-
 def exists_word(word, instance):
     found_word = []
     for file_dict in instance._queue:
