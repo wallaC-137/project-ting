@@ -22,4 +22,6 @@ def exists_word(word, instance):
 
 
 def search_by_word(word, instance):
-    """Aqui irá sua implementação"""
+    found_word = exists_word(word, instance)
+    if not found_word:
+        return []

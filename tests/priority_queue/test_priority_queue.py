@@ -3,20 +3,30 @@ from ting_file_management.priority_queue import PriorityQueue
 
 
 def test_basic_priority_queueing():
-    pq = PriorityQueue()
+    queue = PriorityQueue()
 
-    pq.enqueue({"nome_do_arquivo": "arquivo1.txt", "qtd_linhas": 10})
-    pq.enqueue({"nome_do_arquivo": "arquivo2.txt", "qtd_linhas": 3})
-    pq.enqueue({"nome_do_arquivo": "arquivo3.txt", "qtd_linhas": 7})
-    assert len(pq) == 3
+    queue.enqueue({"nome_do_arquivo": "arquivo1.txt", "qtd_linhas": 10})
+    queue.enqueue({"nome_do_arquivo": "arquivo2.txt", "qtd_linhas": 3})
+    queue.enqueue({"nome_do_arquivo": "arquivo3.txt", "qtd_linhas": 7})
+    assert len(queue) == 3
 
-    assert pq.dequeue() == {"nome_do_arquivo": "arquivo2.txt", "qtd_linhas": 3}
-    assert pq.dequeue() == {"nome_do_arquivo": "arquivo3.txt", "qtd_linhas": 7}
-    assert pq.dequeue() == {
+    assert queue.search(2) == {
+        "nome_do_arquivo": "arquivo3.txt",
+        "qtd_linhas": 7,
+    }
+
+    assert queue.dequeue() == {
+        "nome_do_arquivo": "arquivo2.txt",
+        "qtd_linhas": 3,
+    }
+    assert queue.dequeue() == {
         "nome_do_arquivo": "arquivo1.txt",
         "qtd_linhas": 10,
     }
-    assert len(pq) == 0
+    assert queue.dequeue() == {
+        "nome_do_arquivo": "arquivo3.txt",
+        "qtd_linhas": 7,
+    }
 
     with raises(IndexError):
-        pq.search(7)
+        queue.search(31)
